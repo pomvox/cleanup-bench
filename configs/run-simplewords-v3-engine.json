@@ -1,0 +1,12 @@
+{
+  "system_name": "simplewords-v3-engine",
+  "system_org": "Pomvox",
+  "organizer_row": true,
+  "display_name": "SimpleWords v3 via Pomvox engine (LocalServer)",
+  "attestation": {
+    "no_training_on_items": true,
+    "known_overlap": "SimpleWords v3 was trained on a private synthetic corpus; Disfl-QA was used only as a held-out evaluation set (model card). The hand-written items were authored after the model was trained; no overlap is known.",
+    "declared_exposure": "none"
+  },
+  "notes": "SimpleWords v3 through Examples/LocalServer POST /v1/clean (protocol v1) in the engine repository. Outcomes and byte-offset edits come from the engine; guard rejections surface as fallback with the rejectedBy warning kept (decision S5). Must agree byte for byte with the mlx-lm row wherever the engine returns cleaned; a disagreement is an issue for the engine repository (docs/spec.md section 8)."
+}

@@ -1,0 +1,14 @@
+{
+  "model_id": "ReFyneLabs/simplewords-dictation-cleanup-v3",
+  "prompt_file": "system_v2.txt",
+  "prompt_position": "user-prefix",
+  "enable_thinking": false,
+  "max_tokens": 512,
+  "strip_output": true,
+  "vocabulary_policy": "none",
+  "gated_download": true,
+  "license": "Apache-2.0",
+  "open_weights": true,
+  "params_total": null,
+  "params_total_note": "2B per the model card; exact count not published"
+}

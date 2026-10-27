@@ -34,9 +34,15 @@ def test_validate_reports_item_errors(tmp_path: Path, capsys):
     assert "is a required property" in err
 
 
-def test_unimplemented_commands_say_so(capsys):
-    rc = main(["report"])
-    assert rc == 2
+def test_all_commands_registered():
+    from cleanupbench.cli import build_parser
+
+    names = set(build_parser()._subparsers._group_actions[0].choices)  # type: ignore[union-attr]
+    assert {"validate", "run", "score", "human-ceiling", "canary", "compare-rows"} <= names
+
+
+def test_report_not_yet_implemented(capsys):
+    assert main(["report"]) == 2
     assert "not implemented" in capsys.readouterr().err
 
 

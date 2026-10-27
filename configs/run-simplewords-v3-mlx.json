@@ -1,0 +1,12 @@
+{
+  "system_name": "simplewords-v3-mlx",
+  "system_org": "Pomvox",
+  "organizer_row": true,
+  "display_name": "SimpleWords v3 via mlx-lm",
+  "attestation": {
+    "no_training_on_items": true,
+    "known_overlap": "SimpleWords v3 was trained on a private synthetic corpus; Disfl-QA was used only as a held-out evaluation set (model card). The hand-written items were authored after the model was trained; no overlap is known.",
+    "declared_exposure": "none"
+  },
+  "notes": "SimpleWords v3 through mlx-lm with the recipe from the model card and the app's eval script: system_v2.txt in one user turn, enable_thinking false, greedy, max_tokens 512, output stripped. The reference row for the engine row's byte-for-byte check (docs/spec.md section 8)."
+}

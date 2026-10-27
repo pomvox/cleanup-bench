@@ -1,0 +1,12 @@
+{
+  "system_name": "generic-cloud",
+  "system_org": "Anthropic",
+  "organizer_row": true,
+  "display_name": "generic prompt, hosted model (Anthropic API)",
+  "attestation": {
+    "no_training_on_items": true,
+    "known_overlap": "",
+    "declared_exposure": "none"
+  },
+  "notes": "The bench's fixed generic prompt (prompts/generic-v1.txt) on a hosted model through the Anthropic Messages API. Hosted table only (decision 10); if the two passes differ the row is scored with --allow-nondeterministic and flagged (decision S4)."
+}

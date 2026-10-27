@@ -1,0 +1,12 @@
+{
+  "system_name": "s1-mini",
+  "system_org": "Superwhisper",
+  "organizer_row": true,
+  "display_name": "S1-mini by Superwhisper",
+  "attestation": {
+    "no_training_on_items": true,
+    "known_overlap": "",
+    "declared_exposure": "none"
+  },
+  "notes": "S1-mini (decision 12): llama-server on superwhisper/s1-mini-GGUF:Q4_K_M, the card's exact system prompt (prompts/s1-mini-system.txt, fetched per the runbook) plus the fixed control line, temp 0, thinking off. The naming clause is honoured: the row prints \"S1-mini\" by \"Superwhisper\". Filler-only input returning an empty string is scored under decision 14."
+}

@@ -1,0 +1,14 @@
+{
+  "endpoint": "http://127.0.0.1:8787/v1/clean",
+  "token_env": "POMVOX_LOCALSERVER_TOKEN",
+  "pack_id": "simplewords-v3",
+  "pack_version": "0.1.0-preview",
+  "remaining_ms": 30000,
+  "model_id": "abhiram3040/simplewords-dictation-cleanup-v3",
+  "model_revision": "b1f7ac8282ce060e4ad1374cb9a34750e31723c1",
+  "weights_sha256": "dbe5a5cdc26d383eaf3f7a009d41a746ec2a99ed262095c1ab9146870090240c",
+  "license": "Apache-2.0",
+  "gated_download": true,
+  "params_total": null,
+  "params_total_note": "2B per the model card; exact count not published"
+}

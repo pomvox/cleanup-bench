@@ -1,0 +1,12 @@
+{
+  "system_name": "generic-local",
+  "system_org": "REPLACE_ME",
+  "organizer_row": true,
+  "display_name": "generic prompt, local open-weight model (REPLACE_ME)",
+  "attestation": {
+    "no_training_on_items": true,
+    "known_overlap": "",
+    "declared_exposure": "none"
+  },
+  "notes": "The bench's fixed generic prompt (prompts/generic-v1.txt) on an open-weight model served locally through an OpenAI-compatible endpoint. The owner picks the model and records it in system_org, display_name and configs/adapter-generic-local.json before the run."
+}
