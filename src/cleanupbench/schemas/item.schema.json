@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/pomvox/cleanup-bench/schemas/item.schema.json",
+  "title": "Cleanup Bench item",
+  "description": "One benchmark item. See docs/spec.md section 4.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "category",
+    "input",
+    "input_form",
+    "vocabulary",
+    "references",
+    "slots",
+    "source",
+    "notes",
+    "released",
+    "status",
+    "scored"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z]+(-[a-z]+)*-[a-z0-9]+(-[a-z0-9]+)*-[0-9]{4}$",
+      "description": "<category>-<slice or core>-<4 digits>; stable forever."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "fillers",
+        "restarts",
+        "correction-intra",
+        "correction-cross",
+        "correction-interrogative",
+        "punctuation-casing",
+        "spoken-form",
+        "names-vocabulary",
+        "lists-layout",
+        "negatives",
+        "adversarial-meaning",
+        "instruction-like"
+      ]
+    },
+    "slice": {
+      "type": "string",
+      "pattern": "^[a-z]+(-[a-z]+)*$",
+      "description": "Optional named slice inside the category (spec section 3)."
+    },
+    "input": { "type": "string", "minLength": 1, "maxLength": 16384 },
+    "input_form": {
+      "type": "string",
+      "enum": [
+        "lowercase-unpunctuated",
+        "cased-punctuated",
+        "cased-punctuated-digits",
+        "lowercase-digits"
+      ]
+    },
+    "vocabulary": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[^\\r\\n]+$" }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": { "type": "string" },
+      "description": "One to three cleaned outputs obeying the three laws. The empty string is the reference for a filler-only input (decision 14)."
+    },
+    "slots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["must_contain", "must_not_contain"],
+      "properties": {
+        "must_contain": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "must_not_contain": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "method", "origin", "license", "attribution"],
+      "properties": {
+        "type": { "type": "string", "enum": ["synthetic", "derived", "dictation"] },
+        "method": {
+          "type": "string",
+          "pattern": "^(hand-written|generator:[A-Za-z0-9._-]+@[A-Za-z0-9._-]+|round-trip:[A-Za-z0-9._-]+/[A-Za-z0-9._-]+|corpus)$"
+        },
+        "origin": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string" }
+      }
+    },
+    "notes": { "type": "string" },
+    "taxonomy": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "filled-pause",
+          "explicit-editing-term",
+          "discourse-marker",
+          "restart-with-repair",
+          "restart-without-repair",
+          "complex-restart",
+          "repetition",
+          "substitution",
+          "deletion"
+        ]
+      }
+    },
+    "released": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Date the item first appeared in a tagged release (ISO 8601 date)."
+    },
+    "status": { "type": "string", "enum": ["active", "retired"] },
+    "retired_in": { "type": "string", "description": "Bench version in which the item was retired." },
+    "issue": { "type": "string", "format": "uri", "description": "The dispute issue that retired the item." },
+    "scored": { "type": "boolean" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "retired" } } },
+      "then": { "required": ["retired_in", "issue"] }
+    }
+  ]
+}

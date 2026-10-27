@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# Local model artifacts and caches (never committed)
+.local/
+*.gguf
+*.safetensors
+
+# Generated site is committed deliberately; scratch outputs are not
+/tmp/
+/scratch/
+
+# Owner's reading copy of the research (not part of the repository)
+docs/research-reading-copy.html
+
+# macOS
+.DS_Store

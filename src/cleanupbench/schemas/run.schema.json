@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/pomvox/cleanup-bench/schemas/run.schema.json",
+  "title": "Cleanup Bench run manifest (run.json)",
+  "description": "The manifest for one leaderboard row. `score` refuses a manifest that does not validate. See docs/spec.md section 9.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bench_version",
+    "items_sha256",
+    "system",
+    "adapter",
+    "prompt",
+    "decoding",
+    "vocabulary_policy",
+    "hardware",
+    "software",
+    "run",
+    "determinism",
+    "outputs_sha256",
+    "attestation",
+    "hosted",
+    "hosted_expiry_flag",
+    "checked_by",
+    "checked_date"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "bench_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z.-]+)?$" },
+    "items_sha256": { "$ref": "#/$defs/sha256" },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "org",
+        "organizer_row",
+        "model_id",
+        "model_revision",
+        "open_weights",
+        "license",
+        "params_total",
+        "params_total_note"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "org": { "type": "string", "minLength": 1 },
+        "organizer_row": { "type": "boolean" },
+        "model_id": { "type": "string", "minLength": 1 },
+        "model_revision": { "type": "string", "minLength": 1 },
+        "open_weights": { "type": "boolean" },
+        "license": { "type": "string", "minLength": 1 },
+        "params_total": { "type": ["integer", "null"], "minimum": 0 },
+        "params_total_note": { "type": "string" },
+        "weights_sha256": { "$ref": "#/$defs/sha256" },
+        "api_model_id": { "type": "string", "minLength": 1 },
+        "api_date": { "$ref": "#/$defs/date" },
+        "gated_download": { "type": "boolean" },
+        "display_name": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "params_total": { "type": "null" } } },
+          "then": { "properties": { "params_total_note": { "minLength": 1 } } }
+        }
+      ]
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "config"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["identity", "openai-compatible", "anthropic", "mlx-lm", "pomvox-localserver"]
+        },
+        "version": { "type": "string", "minLength": 1 },
+        "config": { "type": "object" }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "text"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "text": { "type": "string" },
+        "control_line": { "type": "string" }
+      }
+    },
+    "decoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "temperature", "max_tokens"],
+      "properties": {
+        "strategy": { "type": "string", "const": "greedy" },
+        "temperature": { "type": "number", "const": 0 },
+        "max_tokens": { "type": ["integer", "null"], "minimum": 1 },
+        "thinking": { "type": "boolean", "const": false },
+        "top_p": { "type": "number" },
+        "top_k": { "type": "integer" },
+        "seed": { "type": ["integer", "null"] }
+      }
+    },
+    "vocabulary_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "rendering"],
+      "properties": {
+        "source": { "type": "string", "enum": ["item", "none"] },
+        "rendering": { "type": "string" }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["machine", "os", "accelerator", "ram_gb"],
+      "properties": {
+        "machine": { "type": "string", "minLength": 1 },
+        "os": { "type": "string", "minLength": 1 },
+        "accelerator": { "type": "string", "minLength": 1 },
+        "ram_gb": { "type": ["number", "null"] }
+      }
+    },
+    "software": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["python", "packages", "bench_commit"],
+      "properties": {
+        "python": { "type": "string", "minLength": 1 },
+        "packages": { "type": "object", "additionalProperties": { "type": "string" } },
+        "bench_commit": { "type": "string", "minLength": 1 }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_at", "finished_at", "item_count"],
+      "properties": {
+        "started_at": { "$ref": "#/$defs/datetime" },
+        "finished_at": { "$ref": "#/$defs/datetime" },
+        "item_count": { "type": "integer", "minimum": 0 },
+        "items_path": { "type": "string" }
+      }
+    },
+    "determinism": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_a_sha256", "run_b_sha256", "identical"],
+      "properties": {
+        "run_a_sha256": { "$ref": "#/$defs/sha256" },
+        "run_b_sha256": { "$ref": "#/$defs/sha256" },
+        "identical": { "type": "boolean" },
+        "first_divergent_item": { "type": ["string", "null"] }
+      }
+    },
+    "outputs_sha256": { "$ref": "#/$defs/sha256" },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["no_training_on_items", "known_overlap", "declared_exposure"],
+      "properties": {
+        "no_training_on_items": { "type": "boolean" },
+        "known_overlap": { "type": "string" },
+        "declared_exposure": { "type": "string", "enum": ["none", "possible", "yes"] }
+      }
+    },
+    "hosted": { "type": "boolean" },
+    "hosted_expiry_flag": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["withdrawn_on", "note"],
+      "properties": {
+        "withdrawn_on": { "$ref": "#/$defs/date" },
+        "note": { "type": "string" }
+      }
+    },
+    "nondeterministic": { "type": "boolean" },
+    "checked_by": { "type": ["string", "null"] },
+    "checked_date": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "hosted": { "const": true } } },
+      "then": { "properties": { "system": { "required": ["api_model_id", "api_date"] } } },
+      "else": { "properties": { "system": { "required": ["weights_sha256"] } } }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "datetime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    }
+  }
+}

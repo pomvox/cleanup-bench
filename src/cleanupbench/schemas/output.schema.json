@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/pomvox/cleanup-bench/schemas/output.schema.json",
+  "title": "Cleanup Bench output record (one line of outputs.jsonl)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "output_text", "outcome", "fallback_reason", "edits", "warnings", "latency_ms", "raw"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "output_text": { "type": "string" },
+    "outcome": { "type": "string", "enum": ["cleaned", "unchanged", "fallback", "error"] },
+    "fallback_reason": { "type": ["string", "null"] },
+    "edits": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["start", "end", "replacement"],
+        "properties": {
+          "start": { "type": "integer", "minimum": 0 },
+          "end": { "type": "integer", "minimum": 0 },
+          "replacement": { "type": "string" }
+        }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "latency_ms": { "type": ["number", "null"], "minimum": 0 },
+    "raw": { "type": ["string", "null"] }
+  }
+}
