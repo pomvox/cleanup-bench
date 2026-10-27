@@ -10,4 +10,4 @@ Every leaderboard row is a committed run folder that a stranger can replay with 
 
 The research that shaped it is under `docs/research/`; the specification is `docs/spec.md`; the decisions behind the specification are `docs/decisions.md`.
 
-Status: the specification is under review. The code is a scaffold (`cleanupbench validate` and the item and manifest schemas); the scorer, adapters, dataset and leaderboard land in later phases, one pull request each.
+Status: the specification is under review. The scorer, the schemas, the identity adapter and the first hand-written items exist (`cleanupbench validate`, `run`, `score`, `human-ceiling`); the remaining adapters, the dataset freeze and the leaderboard land in later phases, one pull request each.

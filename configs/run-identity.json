@@ -1,0 +1,8 @@
+{
+  "system_name": "identity",
+  "system_org": "Pomvox",
+  "organizer_row": true,
+  "display_name": "identity (output = input)",
+  "attestation": {"no_training_on_items": true, "known_overlap": "none; the identity system has no training data", "declared_exposure": "none"},
+  "notes": "The floor: every output equals its input. Validates the scorer: zero word loss, zero insertions, zero over-cleaning on noop items, F0.5 undefined (no edits)."
+}

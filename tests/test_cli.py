@@ -35,7 +35,11 @@ def test_validate_reports_item_errors(tmp_path: Path, capsys):
 
 
 def test_unimplemented_commands_say_so(capsys):
-    for cmd in ("run", "score", "report"):
-        rc = main([cmd])
-        assert rc == 2
-        assert "not implemented" in capsys.readouterr().err
+    rc = main(["report"])
+    assert rc == 2
+    assert "not implemented" in capsys.readouterr().err
+
+
+def test_canary_command(capsys):
+    assert main(["canary"]) == 0
+    assert "cleanup-bench canary GUID" in capsys.readouterr().out

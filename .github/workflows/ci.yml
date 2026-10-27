@@ -24,3 +24,5 @@ jobs:
         run: uv run pytest
       - name: Validate items and run folders
         run: uv run cleanupbench validate
+      - name: Recompute every committed scores.json and compare
+        run: uv run cleanupbench score --check
