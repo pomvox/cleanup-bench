@@ -6,7 +6,7 @@
   `--check` compares against the committed scores.json instead of writing.
 - `human-ceiling` scores reference 2 against reference 1 (spec section 6.10).
 - `report` generates the static leaderboard from runs/ (phase 5).
-- `compare-rows` is registered by its own module.
+- `compare-rows`, `power` and `data ...` are registered by their own modules.
 """
 
 from __future__ import annotations
@@ -200,8 +200,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_canary.set_defaults(func=cmd_canary)
 
     from cleanupbench.compare import register_commands as register_compare
+    from cleanupbench.data.cli import register_commands as register_data
+    from cleanupbench.power import register_commands as register_power
 
     register_compare(sub)
+    register_power(sub)
+    register_data(sub)
 
     p_report = sub.add_parser("report", help="generate the static leaderboard from runs/")
     p_report.set_defaults(func=cmd_report)

@@ -201,8 +201,8 @@ figure (D4).
 ## 4. Item schema
 
 Items are JSON Lines, one object per line, under `data/items/<category>.jsonl`.
-The JSON Schema is `schemas/item.schema.json`; `cleanupbench validate`
-enforces it.
+The JSON Schema is `src/cleanupbench/schemas/item.schema.json`;
+`cleanupbench validate` enforces it.
 
 ```json
 {
@@ -533,7 +533,7 @@ permission.
 A row is `runs/<system>/<date>/` with `run.json`, `outputs.jsonl` and
 `scores.json` (`04` submission rule 1). `score` refuses a manifest missing any
 required field (`04` run manifest). The JSON Schema is
-`schemas/run.schema.json`.
+`src/cleanupbench/schemas/run.schema.json`.
 
 Required fields (each with its precedent in `04`):
 
@@ -570,7 +570,13 @@ raw response text where that differs from `output_text`, for audit).
 
 Determinism: `run` performs two passes and records both hashes; `score`
 refuses `identical: false` except for hosted rows with an explicit flag
-(D-S4). Greedy decoding is recorded, not assumed.
+(D-S4). Greedy decoding is recorded, not assumed. The determinism hash is
+the SHA-256 of the canonical JSON of the output records sorted by id,
+restricted to `id`, `output_text`, `outcome`, `fallback_reason` and `edits`,
+so that latency never breaks it; `outputs_sha256` is the hash of the stored
+file and ties `scores.json` to it. Pass A is stored; pass B exists only to
+prove the hash, and the first divergent item id is recorded when they
+differ.
 
 ## 10. Leaderboard
 
@@ -596,7 +602,10 @@ from `ERRATA.md`.
 process, the conflict-of-interest statement, the retire-never-edit rule and
 the external reviewer's name (D18). `SUBMITTING.md` holds the mechanics. The
 dispute issue template is `.github/ISSUE_TEMPLATE/item-dispute.yml`; the row
-dispute template is `row-dispute.yml` (`04` dispute process).
+dispute template is `row-dispute.yml` (`04` dispute process). The
+generation gates, the review sheets with Cohen's κ, the discard log and the
+promotion step live under `cleanupbench data` (`data/review/GUIDELINE.md`),
+and `cleanupbench power` implements §7.2.
 
 ## 12. Licenses and attribution
 

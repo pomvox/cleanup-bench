@@ -10,4 +10,4 @@ Every leaderboard row is a committed run folder that a stranger can replay with 
 
 The research that shaped it is under `docs/research/`; the specification is `docs/spec.md`; the decisions behind the specification are `docs/decisions.md`.
 
-Status: the specification is under review. The scorer, the schemas, the identity adapter and the first hand-written items exist (`cleanupbench validate`, `run`, `score`, `human-ceiling`); all five adapters exist with tests against fake servers (no model rows yet; `docs/MAC_STUDIO_RUNBOOK.md` produces them); the dataset freeze and the leaderboard land in later phases, one pull request each.
+Status: the specification is under review. The scorer, the schemas, the identity adapter and the first hand-written items exist (`cleanupbench validate`, `run`, `score`, `human-ceiling`); all five adapters exist with tests against fake servers (no model rows yet; `docs/MAC_STUDIO_RUNBOOK.md` produces them); the dataset tooling (power calculation, Disfl-QA derivation, gates, review, promotion) exists and the v1 freeze waits for the pilot and the owner's decisions; the leaderboard lands in the last phase.
