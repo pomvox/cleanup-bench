@@ -595,3 +595,157 @@ Each bullet: URL, access date, what it gave this file. All opened 2026-10-24.
 - https://arxiv.org/abs/2506.21182 — 2026-10-24 — same paper, abstract page.
 - https://github.com/embeddings-benchmark/mteb/blob/main/docs/reproducible_workflow.md, .../docs/adding_a_dataset.md, .../docs/create_tasks.md — 2026-10-24 — **HTTP 404** on all three.
 - https://arxiv.org/abs/1806.03822 — 2026-10-24 — SQuAD 2.0 abstract: released as a new version adding items.
+
+## Addendum 2026-10-27
+
+Second attempt at two "Not found" items above: Kaggle's own description of
+its public/private leaderboard split (§5) and a published consent template
+for releasing one's own dictations (§4). All pages opened 2026-10-27.
+
+### Found
+
+**Kaggle's leaderboard split, from Kaggle's own page text.** The live page
+`https://www.kaggle.com/docs/competitions` served a reCAPTCHA interstitial
+("Checking your browser before accessing www.kaggle.com") to curl and a title
+only to the fetch tool; Wayback Machine snapshots of 2018-10-27, 2020-01-12,
+2022-01-05 and 2026-10-14 are JavaScript shells with the title only; there is
+no `Kaggle/docs` repository on GitHub (HTTP 404) and a web search found no
+GitHub-hosted source. The page's text was obtained through a third-party
+reader proxy (`https://r.jina.ai/https://www.kaggle.com/docs/competitions`),
+which renders the live page and returns its content with the header "URL
+Source: https://www.kaggle.com/docs/competitions"; it is a rendering of the
+official page, not an archive, and is recorded as such. Under the heading "The
+Leaderboard" the page says: "Public Leaderboard: Visible during the
+competition; based on a sample of test data." "Private Leaderboard: The final
+ranking based on the remainder of the test data." "Overfitting: A high public
+score doesn't guarantee a high private score. Avoid 'chasing' the public
+leaderboard." No percentage or fraction is stated. Two neighbouring
+statements matter for §5: "Some Code Competitions are split into Stage 1 and
+Stage 2. Stage 2 involves a new test dataset previously unavailable until the
+start of that stage." and, under "Leakage", "Kaggle may address leakage by
+relaunching a competition or generating a new test set."
+
+**Consent templates and release terms for speech-derived data.** No template
+written for a person releasing their own dictations as text was found; what
+exists are speaker-consent templates for corpora built from other people's
+speech, one crowd project's contributor terms, two documentation schemas and
+one data-licence taxonomy. Their elements:
+
+- *LMU Munich BAS "Template 'Informed Consent Form'"*
+  (`https://www.phonetik.uni-muenchen.de/Bas/BasTemplateInformedConsent_en.pdf`,
+  one page). Elements: scope ("can be used for the creation of a speech corpus
+  with the aim to study <ProjectTopic>"); a named responsible person with
+  contact data; anonymisation of data and metadata after a fixed period ("after
+  3 months starting with the recording date they cannot referenced back to my
+  name or to my address"); a revocation window ("Within the period of 3 months
+  after the recording date I can revoke this declaration and demand the
+  deletion of all recorded data and metadata"); transfer of usage rights after
+  that window "including the publication of parts of the data in scientific
+  media and the distribution to a restricted group of users"; an informed
+  statement and a copy for the speaker. The remarks say the revocation window
+  "is not necessary by European law" but is recommended, that compensation
+  should be stated, and, on identifiability: "we recommend to state clearly in
+  the consent form that a anonymization/pseudonymization is not feasible and
+  not intended, so that the speaker knows that the data can be traced back to
+  his person (otherwise the consent would be misleading!)".
+- *Common Voice contributor and downloader terms.* The site is JavaScript-only
+  (`commonvoice.mozilla.org/en/terms` returned "Please enable JavaScript to
+  run this app"), so the strings were read from the project's English locale
+  files on GitHub. Datasets page: "You agree to not attempt to determine the
+  identity of speakers in the Common Voice dataset"; "License: CC-0". Profile
+  deletion: "Would you like to request your voice recordings be deleted too,
+  or do you prefer to keep them in the Common Voice dataset?"; "We will review
+  your request to remove your voice recordings from the dataset. If your
+  request is approved, we will contact those who have downloaded the dataset
+  and request they remove your voice recordings as well."; "Once you delete
+  your profile you will no longer be able to submit a request to remove your
+  recordings from the dataset". The terms page itself is not in the locale
+  tree and was not read.
+- *Data Statements (Bender and Friedman 2018, TACL,
+  `https://aclanthology.org/Q18-1041.pdf`).* Long-form schema: A curation
+  rationale; B language variety with a BCP-47 tag; C speaker demographic; D
+  annotator demographic; E speech situation ("Time and place", "Modality",
+  "Scripted/edited vs. spontaneous", "Synchronous vs. asynchronous
+  interaction", "Intended audience"); F text characteristics; G recording
+  quality; H other; I provenance appendix. The *Data Statements Guide V2*
+  (UW Tech Policy Lab,
+  `https://techpolicylab.uw.edu/wp-content/uploads/2021/11/Data_Statements_Guide_V2.pdf`,
+  CC BY-ND per its licence page) renumbers these to fourteen elements and
+  adds the ones a consent file needs: "9. Preprocessing and Data Formatting",
+  which should include "information about any anonymization procedures" and
+  "whether the raw data is included in the dataset"; "12. Metadata", with a
+  "License: Link to the license/copyright permissions"; and "13. Disclosure
+  and Ethical Review", which asks for "a brief description of any consent
+  process used" phrased as "written consent", "oral consent" or "implied
+  consent", "any access restrictions to the data", "any potential conflicts of
+  interest", and, where no ethics board exists, the sentence "An institutional
+  ethics review process was not accessible at the time of dataset creation."
+- *Montreal Data License (Benjamin et al. 2019, arXiv 1903.12262; the
+  licence's own site `montrealdatalicense.com` gave no HTTP response).*
+  Appendix 4 licence language is "made available under CC-BY4". Its rights
+  taxonomy separates rights in the data (Access: "view it and evaluate it
+  (evaluation algorithms may be exposed to it, but no Untrained Models)";
+  Tagged Data; Distribute "under the same terms as those of this License";
+  Representation) from rights with models (Benchmark: "the right to use the
+  dataset to measure performance of a Trained or Untrained Model"; Research;
+  Publish; Internal Use; Output Commercialization; Model Commercialization),
+  with an attribution-and-notice clause and a default that rights are
+  "perpetual and irrevocable, unless otherwise specified in writing by
+  Licensor".
+- *Not reached.* LDC: the consent page returned HTTP 404 and the licensing and
+  FAQ pages HTTP 403 behind a "Just a moment..." challenge. ELRA's services
+  page rendered navigation only. A University of Virginia HRPP "Materials
+  Release Form" (DOCX) returned HTTP 403; an NTU "audio release form" page
+  gave no response; TalkBank permission forms and the Speech Accessibility
+  Project consent were surfaced by search only and were not opened, so they
+  are not cited.
+
+### What this changes
+
+- Decision 7 (owner's dictations in v1) keeps recommendation (b) unless the
+  consent file is written first; the elements that file needs are now
+  sourced rather than guessed. From the pages above, `OWNER_CONSENT.md`
+  should state: the scope of use (text only; audio never released; which
+  categories); what is released per item and what is withheld (raw data
+  included or not, per Guide V2 element 9); the identifiability position in
+  the LMU template's plain form (either that names and places are replaced
+  by rule, with the rule and tool named and the Presidio no-guarantee warning
+  from §4 repeated, or that scrubbing is not feasible and the text can be
+  traced to the owner); the revocation mechanism and its reach after release
+  (retire-never-edit plus an erratum, and a request to known downloaders as
+  Common Voice does); the per-item licence and, following the Montreal
+  taxonomy, an explicit statement that benchmark use (measuring performance)
+  and redistribution under the same terms are granted; the consent type in
+  Guide V2's wording ("written consent") and the ethics-review sentence for a
+  project with no board; and the conflict-of-interest fact that licensor and
+  subject are the same person. This file does not write that document.
+- Decision 8 (contamination defence) is unchanged. Kaggle's page confirms the
+  public/private split as described second-hand in §5 and adds that the
+  split is complemented by staged fresh test sets and relaunches; all three
+  need an operator who holds data the public cannot see, which is the trade-off
+  §5 already states. The row for "Hidden test labels" in §5 should cite the
+  Kaggle text above instead of "could not be confirmed".
+
+### Sources (2026-10-27)
+
+- https://www.kaggle.com/docs/competitions — 2026-10-27 — curl: HTTP 200 reCAPTCHA interstitial; fetch tool: title only.
+- https://archive.org/wayback/available?url=kaggle.com/docs/competitions — 2026-10-27 — closest snapshot 2026-10-14.
+- https://web.archive.org/web/20261014102845/https://www.kaggle.com/docs/competitions, https://web.archive.org/web/20220105110921/..., https://web.archive.org/web/20200112090558/..., https://web.archive.org/web/20181027133727/... — 2026-10-27 — JavaScript shells, title only.
+- https://api.github.com/repos/Kaggle/docs — 2026-10-27 — HTTP 404.
+- https://r.jina.ai/https://www.kaggle.com/docs/competitions — 2026-10-27 — third-party reader rendering of the live Kaggle page; "The Leaderboard" bullets, Stage 1/Stage 2 and leakage sentences quoted above.
+- Web search "kaggle docs competitions public leaderboard private leaderboard site:github.com" — 2026-10-27 — no official source; snippets not used.
+- https://www.phonetik.uni-muenchen.de/Bas/BasTemplateInformedConsent_en.pdf — 2026-10-27 — HTTP 200; speaker consent template and remarks.
+- https://commonvoice.mozilla.org/en/terms — 2026-10-27 — HTTP 200, "Please enable JavaScript to run this app"; not readable.
+- https://api.github.com/repos/common-voice/common-voice/git/trees/main?recursive=1 — 2026-10-27 — file tree used to locate the locale files.
+- https://raw.githubusercontent.com/common-voice/common-voice/main/web/locales/common-voice/en/pages/datasets.ftl — 2026-10-27 — no-identification agreement, CC-0 licence string.
+- https://raw.githubusercontent.com/common-voice/common-voice/main/web/locales/common-voice/en/pages/profile/delete.ftl — 2026-10-27 — recording-deletion request strings.
+- https://aclanthology.org/Q18-1041.pdf — 2026-10-27 — Bender and Friedman 2018, schema elements A to I.
+- https://techpolicylab.uw.edu/data-statements/ — 2026-10-27 — project page; links the guide.
+- https://techpolicylab.uw.edu/wp-content/uploads/2021/11/Data_Statements_Guide_V2.pdf — 2026-10-27 — elements 9, 12 and 13 quoted; CC BY-ND notice.
+- https://arxiv.org/abs/1903.12262 and https://arxiv.org/pdf/1903.12262 — 2026-10-27 — Montreal Data License paper; Appendix 4 licence language.
+- https://www.montrealdatalicense.com/ and https://montrealdatalicense.com/en/ — 2026-10-27 — no HTTP response.
+- https://www.ldc.upenn.edu/data-management/using/consent — 2026-10-27 — HTTP 404 (fetch tool); https://www.ldc.upenn.edu/data-management/using/licensing and https://www.ldc.upenn.edu/about/faq — HTTP 403, "Just a moment..." challenge.
+- https://www.elra.info/en/services-around-lrs/legal-services/ — 2026-10-27 — redirected to https://www.elra.info/catalogues/services/; navigation only.
+- https://hrpp.research.virginia.edu/sites/researchhrpp/files/2024-08/IRB-SBS%20Materials%20Release%20Form.docx — 2026-10-27 — HTTP 403.
+- https://nanyangtechnologicaluniv.demo.elsevierpure.com/en/datasets/growing-collection-of-human-voices-audio-release-form — 2026-10-27 — no HTTP response.
+- Web search "consent form template speech corpus release public dataset IRB" — 2026-10-27 — located the LMU template; other results not opened.

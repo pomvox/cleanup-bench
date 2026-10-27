@@ -680,3 +680,86 @@ Access date for all: 2026-10-24.
 - https://hyper.ai/en/news/42900 — Papers with Code sunset (secondary).
 - https://www.kaggle.com/docs/competitions — title only via WebFetch and a
   JavaScript shell via curl; not found.
+
+## Addendum 2026-10-27
+
+Second attempt at the primary OpenAI post on SWE-bench Verified, which §4
+above had to take from pages that cite it. Opened 2026-10-27.
+
+### Found
+
+The live URL `https://openai.com/index/introducing-swe-bench-verified/` still
+returns HTTP 403 to curl with a browser User-Agent. The Wayback Machine is no
+longer blocked: `archive.org/wayback/available` reports a closest snapshot of
+2026-10-16, and the snapshot
+`https://web.archive.org/web/20241231052539/https://openai.com/index/introducing-swe-bench-verified/`
+(HTTP 200) carries the full article, dated "August 13, 2024". From that copy:
+
+- *Who annotated, how many, how much.* "we launched a human annotation
+  campaign with professional software developers to screen each sample of the
+  SWE-bench test set for appropriately scoped unit tests and well-specified
+  issue descriptions." "We worked with 93 software developers experienced in
+  Python to manually screen SWE-bench samples for quality. We annotated 1,699
+  random samples from the SWE-bench test set to produce SWE-bench Verified."
+  "Our team of engineers first hand-labeled 50 samples to a high degree of
+  confidence for use in annotator onboarding tests." "Annotators were not
+  necessarily prior experts in the codebases relevant to SWE-bench, but were
+  given time to familiarize themselves with each codebase they worked with."
+- *Redundancy and ensembling.* "each sample is labeled 3 times by separate
+  annotators. It is easy to accidentally miss potential issues, and issues
+  themselves can be ambiguous, so we conservatively ensemble annotations by
+  taking the highest-severity label amongst the 3 annotators."
+- *Rubric.* Problem statements: "0: The issue is well-specified and it is
+  clear what is required for a successful solution. 1: There are some blanks
+  to fill in about the issue, but there is a sensible interpretation of what
+  is required for a successful solution. 2: The issue is vague and there is
+  room for ambiguity. It is unclear what a successful solution would look
+  like. 3: It is almost impossible to understand what you are being asked to
+  do without further information." Tests: "0: The tests perfectly cover all
+  possible solutions. 1: The tests cover the majority of correct solutions,
+  however some unusual solutions may be missed. 2: The tests work but some
+  perfectly reasonable solutions may be missed by the tests. 3: The tests are
+  too narrow/broad or they look for something different than what the issue
+  is about." A free-form field flags "any other major issues". Difficulty is
+  also rated but is "not used for dataset filtering". "The full text of our
+  annotation rubric can be found here" links
+  `cdn.openai.com/introducing-swe-bench-verified/swe-b-annotation-instructions.pdf`
+  (not opened).
+- *Filter rule.* "we filter out any sample from the original test set where
+  either the problem statement or the FAIL_TO_PASS unit tests have an ensemble
+  label of 2 or above in severity. We also filter out all samples that have
+  other major issues flagged. Given our ensembling method, this is equivalent
+  to filtering out samples where any single annotator of three has flagged an
+  issue with the sample. This approach leads to a higher false-positive rate
+  in removing samples, but helps increase our confidence in sample" quality.
+- *Results.* "38.3% of samples were flagged for underspecified problem
+  statements, and 61.1% were flagged for unit tests that may unfairly mark
+  valid solutions as incorrect. Overall, our annotation process resulted in
+  68.3% of SWE-bench samples being filtered out". The release is "a subset of
+  the original test set from SWE-bench, consisting of 500 samples verified to
+  be non-problematic by our human annotators", which "supersedes the original
+  SWE-bench and SWE-bench Lite test sets", and "we are releasing our human
+  annotations for all SWE-bench test samples".
+
+The second-hand figures in §4 (93 developers; 500 retained) match the
+primary. The primary adds the 1,699-sample annotation pool, the three-label
+redundancy, the highest-severity ensembling, the 0 to 3 scales and the
+drop-on-any-flag rule, none of which the citing pages gave.
+
+### What this changes
+
+No decision moves. Two process details are worth carrying into the review
+pass of `03-data.md` R3 and the dispute process in "What is recommended": the
+rule that a single reviewer's flag retires an item (accepting a higher
+false-positive rate, as OpenAI states), and the release of every reviewer's
+per-item labels alongside the dataset, which is the form the audit trail for
+"retire, never edit" can take. §4's sentence "the construction details are
+taken from pages that cite it" is superseded by this addendum, and the
+Sources entry for the OpenAI post should read as below.
+
+### Sources (2026-10-27)
+
+- https://openai.com/index/introducing-swe-bench-verified/ — 2026-10-27 — HTTP 403 (curl, browser User-Agent).
+- https://archive.org/wayback/available?url=openai.com/index/introducing-swe-bench-verified — 2026-10-27 — HTTP 200; closest snapshot 2026-10-16.
+- https://web.archive.org/web/20241231052539/https://openai.com/index/introducing-swe-bench-verified/ — 2026-10-27 — HTTP 200 (reached via https://web.archive.org/web/2024/...); article dated August 13, 2024; all quotations above.
+- https://cdn.openai.com/introducing-swe-bench-verified/swe-b-annotation-instructions.pdf — linked from the post as the full rubric; not opened.

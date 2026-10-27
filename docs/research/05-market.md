@@ -327,3 +327,131 @@ Gladia:
 
 Unreachable or empty pages (recorded, not cited above as evidence):
 https://developers.deepgram.com/docs/smart-format (reached); https://www.assemblyai.com/docs/speech-to-text/pre-recorded-audio/filler-words (404); https://www.assemblyai.com/docs/speech-to-text/pre-recorded-audio/text-formatting (404); https://docs.speechmatics.com/features/output-formatting (404); https://feedback.monologue.to/changelog (404); https://www.monologue.to/mono-1 (404); https://x.com/usemonologue/status/2103165807442485742 (HTTP 402); https://tryvoiceink.com/docs/refine (404); https://developer.apple.com/documentation/speech/speechanalyzer, .../speechtranscriber, .../speechtranscriber/transcriptionoption and .../bringing-advanced-speech-to-text-capabilities-to-your-app (HTML pages served titles only; the JSON data endpoints above were used instead); https://docs.monologue.to/ and https://help.monologue.to/en/articles/14178197-dictating-with-monologue (308 redirects to www.monologue.to/docs, followed).
+
+## Addendum 2026-10-27
+
+Second attempt at three items from "What this file could not establish":
+VoiceInk Refine's licence, Wispr Flow's developer API, and which models the
+closed vendors use for cleanup. Every page below was opened on 2026-10-27.
+
+### Found
+
+**VoiceInk Refine LICENSE.md is readable.** Both
+`https://huggingface.co/beingpax/voiceink-refine-v1/raw/main/LICENSE.md` and
+`.../resolve/main/LICENSE.md` returned HTTP 200 with the same 275-byte file.
+Its operative text in full: "This model is provided for use with the VoiceInk
+application only. Commercial use, redistribution, and use in other software
+or open-source projects are not permitted without permission from the
+copyright holder." followed by "Copyright (c) 2026 beingpax. All rights
+reserved." The Hub API (`/api/models/beingpax/voiceink-refine-v1`, resolving
+to `beingpax/VoiceInk-Refine-V1`, `gated: false`, last modified 2026-08-01)
+lists `LICENSE.md`, `LICENSE-QWEN-APACHE-2.0.txt`, `THIRD_PARTY_NOTICES.md`,
+`README.md`, `chat_template.jinja`, `config.json`, `model.safetensors` and
+tokenizer files. `THIRD_PARTY_NOTICES.md`: "derived from Qwen3.5-2B, copyright
+2026 Alibaba Cloud"; the upstream "is licensed under the Apache License 2.0";
+the package "has been modified from the upstream checkpoint, including
+conversion to a text-only MLX package and 4-bit quantization. VoiceInk-specific
+terms are provided separately in LICENSE.md." The README repeats "This model
+is provided for use with VoiceInk." No file mentions evaluation, benchmarking
+or research use. The licence grants nothing outside "the VoiceInk application";
+loading the weights under mlx-lm from this repository is "use in other
+software or open-source projects", which the file says is "not permitted
+without permission from the copyright holder". Redistribution of the weights
+is named as not permitted; the file says nothing either way about
+redistributing outputs.
+
+**Wispr Flow has an official API, and it is not a cleanup API.**
+`https://developers.wisprflow.ai` (HTTP 200) is a Mintlify site titled "Wispr
+Flow Enterprise API": "Bring your organization's Wispr Flow meetings into your
+own tools"; "The API is a REST API served from https://api.wisprflow.ai. Every
+endpoint is read-only, and every response is JSON."; "To get an API key, reach
+out to your Wispr representative." Its `openapi.json` (title "Wispr Flow
+Public API", version "1.0.0") defines two paths, `/public/v1/admin/meetings`
+and `/public/v1/admin/meetings/{meeting_id}`, and describes itself as "Read
+your organization's Wispr Flow data"; `llms.txt` lists the same two
+endpoints and nothing else. `https://platform.wisprflow.ai` returned HTTP 200
+with the title "Flow API | Dashboard" and the body "You need to enable
+JavaScript to run this app." (742 bytes), so whatever that dashboard offers
+could not be read; `/docs` under it served the same shell.
+`https://wisprflow.ai/developers` is a marketing page ("Flow for Developers",
+"syntax-smart dictation built for developers") with no API.
+`https://wisprflow.ai/api`, `/subprocessors`, `/terms`, `/security`,
+`/flow-api`, `/legal/privacy`, `/legal/subprocessors` and
+`developers.wisprflow.ai/docs` returned HTTP 404; `https://api.wisprflow.ai/`
+returned 200 with an 18-byte body and `/docs` under it 404. A web search
+("Wispr Flow API developer platform") surfaced only the apievangelist
+third-party catalogue listings already noted in this file; no official
+developer page beyond the Enterprise API above. Text-in cleanup over an API:
+still not offered by Wispr on any page opened.
+
+**Cleanup model names: still not stated by any of the four vendors.**
+
+- Wispr Flow privacy policy (`https://wisprflow.ai/privacy-policy`, "Last
+  Updated: August 19, 2026"): discloses data to "third-party LLM providers and
+  AI service providers" and says "Where third-party AI or language model
+  providers are used to provide requested Service functionality, such
+  providers may process Customer Content and Meeting Data solely for the
+  purpose of providing the Services". No provider is named. The
+  `https://wisprflow.ai/privacy` page is a marketing overview (SOC 2, ISO
+  27001, "Transcription always happens in the cloud") that links the policy
+  and a Trust Center; no subprocessor list was reachable.
+- Willow privacy policy (`https://willowvoice.com/privacy-policy`, "Last
+  updated on August 5, 2026"; `/privacy` is 404): "Willow uses cloud
+  infrastructure to provide fast and accurate voice dictation, transcription,
+  note-taking, and related features"; content "may be processed transiently by
+  Willow and its service providers", which "are subject to Zero Data Retention
+  and no-model-training controls". No provider named.
+- Typeless privacy policy (`https://www.typeless.com/privacy`, "Last Updated:
+  Oct 13, 2026"): "we may send your audio and relevant text to third-party
+  cloud AI providers, including Microsoft and Google, to provide the Services.
+  Data sent to third-party LLM providers is never used to train these services
+  and is configured for zero retention by those providers". Two providers are
+  named; which one does cleanup, and which model, is not stated. The page
+  links a subprocessor list at `https://trust.typeless.com/subprocessors`,
+  which returned HTTP 429 behind a "Vercel Security Checkpoint".
+- Aqua Voice privacy policy (`https://aquavoice.com/privacy`, "Effective Date:
+  October 20, 2026"): "Aqua Voice provides transcription services that process
+  audio inputs"; third-party service providers are listed for "hosting
+  services, payment processing, customer support, data analytics, and
+  advertising measurement". No AI or model provider is named for processing.
+
+### What this changes
+
+- Decision 13 (VoiceInk Refine as a baseline): the recommendation becomes
+  (b) exclude, on the licence text rather than on its absence. The licence
+  permits use only inside the VoiceInk application and forbids use in other
+  software or open-source projects without permission; it contains no
+  evaluation or benchmark clause. A Refine row may be added later only if the
+  copyright holder gives written permission, recorded in the run manifest's
+  provenance fields, and the row's licence field must say so. The
+  recommendation "VoiceInk Refine v1 via mlx-lm only if the LICENSE.md
+  permits evaluation use" above is therefore resolved as: it does not.
+- The baseline list in "What is recommended" and in `00-summary.md` is
+  unchanged otherwise: identity, SimpleWords v3 (LocalServer and mlx-lm),
+  S1-mini via `llama-server`, and generic prompts. Wispr's Enterprise API
+  does not change the adapter list; it reads meetings, not text.
+- "What this file could not establish" bullets 1, 2 and 5 are closed as
+  above; the Typeless provider names are the only new fact for bullet 2.
+
+### Sources (2026-10-27)
+
+- https://huggingface.co/beingpax/voiceink-refine-v1/raw/main/LICENSE.md — 2026-10-27 — HTTP 200; full licence text quoted above.
+- https://huggingface.co/beingpax/voiceink-refine-v1/resolve/main/LICENSE.md — 2026-10-27 — HTTP 200; byte-identical to the raw URL.
+- https://huggingface.co/api/models/beingpax/voiceink-refine-v1 — 2026-10-27 — HTTP 200; canonical id, file list, `gated: false`, last modified date.
+- https://huggingface.co/beingpax/voiceink-refine-v1/raw/main/THIRD_PARTY_NOTICES.md — 2026-10-27 — Qwen3.5-2B upstream, Apache 2.0 upstream, MLX conversion and 4-bit quantization.
+- https://huggingface.co/beingpax/voiceink-refine-v1/raw/main/README.md — 2026-10-27 — card source; "provided for use with VoiceInk".
+- https://developers.wisprflow.ai — 2026-10-27 — HTTP 200; Enterprise API introduction, read-only, key from a Wispr representative.
+- https://developers.wisprflow.ai/openapi.json — 2026-10-27 — HTTP 200; two meeting endpoints, server `https://api.wisprflow.ai`.
+- https://developers.wisprflow.ai/llms.txt — 2026-10-27 — HTTP 200; same two endpoints.
+- https://platform.wisprflow.ai and https://platform.wisprflow.ai/docs — 2026-10-27 — HTTP 200; title "Flow API | Dashboard", JavaScript shell only.
+- https://wisprflow.ai/developers — 2026-10-27 — HTTP 200; marketing page, no API.
+- https://wisprflow.ai/api, https://wisprflow.ai/subprocessors, https://wisprflow.ai/terms, https://wisprflow.ai/security, https://wisprflow.ai/flow-api, https://wisprflow.ai/legal/privacy, https://wisprflow.ai/legal/privacy-policy, https://wisprflow.ai/legal/subprocessors, https://developers.wisprflow.ai/docs, https://api.wisprflow.ai/docs — 2026-10-27 — HTTP 404.
+- https://api.wisprflow.ai/ — 2026-10-27 — HTTP 200, 18-byte body, no documentation.
+- https://wisprflow.ai/privacy — 2026-10-27 — HTTP 200; marketing privacy overview, links to `/privacy-policy`.
+- https://wisprflow.ai/privacy-policy — 2026-10-27 — HTTP 200; "Last Updated: August 19, 2026"; unnamed "third-party LLM providers and AI service providers".
+- https://willowvoice.com/privacy-policy — 2026-10-27 — HTTP 200; "Last updated on August 5, 2026"; unnamed service providers. https://willowvoice.com/privacy, https://willowvoice.com/legal/privacy, https://www.willowvoice.com/privacy — HTTP 404.
+- https://www.typeless.com/privacy — 2026-10-27 — HTTP 200; "Last Updated: Oct 13, 2026"; "Microsoft and Google" named as cloud AI providers.
+- https://trust.typeless.com/subprocessors — 2026-10-27 — HTTP 429, Vercel Security Checkpoint; not read.
+- https://aquavoice.com/privacy — 2026-10-27 — HTTP 200; "Effective Date: October 20, 2026"; no AI provider named.
+- https://trust.wisprflow.ai/ and https://trust.wisprflow.ai/subprocessors — 2026-10-27 — no HTTP response (connection failed).
+- Web search "Wispr Flow API developer platform" — 2026-10-27 — only third-party catalogue listings (apievangelist.com) and review sites; not opened, not cited.

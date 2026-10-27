@@ -61,7 +61,7 @@ the pains users describe as damaging; fillers are an expectation, not a pain
 | 10 | Hosted-API rows | (a) main board; (b) separate dated table with an expiry flag, never edited | (b). HELM entered maintenance mode citing API drift and deprecation. | `04-governance.md` §3, rec. 6 |
 | 11 | SimpleWords download gating | (a) keep the Hugging Face gate and document the account requirement; (b) remove the gate or publish an ungated mirror | (b), if "reproducible by a stranger with one command" is to hold literally. | `05-market.md` licenses; model card opened 2026-10-24 |
 | 12 | S1-mini as a v1 baseline | (a) include via `llama-server` on the Q4_K_M GGUF with the card's prompt and a fixed control line, naming clause honoured; (b) exclude | (a). It is the only other open-weight cleanup model with a published prompt and greedy requirement. Record the control line in the manifest. | `05-market.md` §2, recs |
-| 13 | VoiceInk Refine as a baseline | (a) include via mlx-lm; (b) exclude until its LICENSE.md is read | (b) | `05-market.md` §8 |
+| 13 | VoiceInk Refine as a baseline | (a) include via mlx-lm if the license permits evaluation and redistribution of outputs; (b) exclude otherwise | (b). LICENSE.md, read 2026-10-27: "provided for use with the VoiceInk application only"; "use in other software or open-source projects are not permitted without permission from the copyright holder"; no evaluation clause. A row is possible only with the holder's written permission, recorded in the manifest. | `05-market.md` §8, Addendum 2026-10-27 |
 | 14 | Empty output | (a) score as total word loss; (b) treat as a fallback-like status when the reference is empty, word loss otherwise | (b); the spec must define it because S1-mini returns an empty string for filler-only input. | `05-market.md` §2; `02-metrics.md` metric 7 |
 | 15 | Homophone policy in references | (a) fix unambiguous homophones, as the vault's model is trained to; (b) leave as said, as the style guides' "do not correct grammar" implies | Owner's call; this is a reference-writing decision and the scorer is neutral on it. If (a), already-correct cases must appear as negatives. | `01-existing-benchmarks.md` §7; `02-metrics.md` conflicts 3 |
 | 16 | Style-guide disagreements | discourse-marker scope ("like", "you know", "I mean", "sort of"); slang expansion ("gonna"); grammar correction; emphatic repetition | Narrow discourse-marker removal (only "like" and "you know" when meaningless, per TranscribeMe); never expand slang; never correct grammar; keep emphatic repetition. All four follow the third law. | `01-existing-benchmarks.md` §7, rec. 7 |
@@ -130,7 +130,7 @@ Line by line against the appendix:
   lacks: edit accountability (the second law has no metric otherwise) and a
   human-ceiling row where two references exist (`02`).
 - **Baselines**: confirmed and extended with S1-mini; VoiceInk Refine is
-  conditional on its license; cloud baselines go to a dated table (`04`,
+  excluded by its license (decision 13); cloud baselines go to a dated table (`04`,
   `05`).
 - **Evidence** (committed run folder, one-command replay, two runs hash
   identical): confirmed; the manifest gains organizer-provenance, attestation
@@ -178,31 +178,56 @@ Two premises in the prompt itself are corrected by the research:
 
 ## What could not be found out
 
+Retried 2026-10-27 (Part 1b; details in the "Addendum 2026-10-27" sections
+of files 03, 04, 05 and 06): Reddit was reached through two archive mirrors
+(pullpush, arctic-shift) and not through reddit.com itself; the r/WisprFlow
+and r/superwhisper material confirms the four highest-weighted pains and adds
+none for `correction-interrogative`, so the weighting in file 06 stands.
+VoiceInk Refine's LICENSE.md was read: use is limited to the VoiceInk
+application and use in other software is forbidden without permission, which
+settles decision 13 as (b). Wispr Flow's official API exists but is a
+read-only meetings API; no vendor names its cleanup model, except that
+Typeless names Microsoft and Google as cloud AI providers. OpenAI's SWE-bench
+Verified post was read from the Wayback Machine and confirms the figures
+cited second-hand. Kaggle's leaderboard text was read through a third-party
+rendering of the official page; it states the split without a percentage.
+Consent-form elements were sourced from an LMU Munich speaker template,
+Common Voice's contributor strings, the Data Statements guide and the
+Montreal Data License, but no template written for releasing one's own
+dictations exists. The list that remains:
+
 - Any English dataset of real dictation with cleaned references (`01` §8).
 - A published over-correction, fabrication or omission rate for ASR
   post-editing; a human-ceiling study for cleanup; any judge-bias study on
   this task (`02` §4, §7).
 - Any generator for cross-sentence or interrogative-phrase corrections (`03`
   §2).
-- Reddit, which was unreachable by every route tried; the Monologue feedback
-  board, offline; the New York Times essay on Wispr Flow; G2, TrustRadius and
-  Product Hunt reviews (`06` source table).
-- The primary OpenAI post on SWE-bench Verified (HTTP 403) and Kaggle's own
-  description of its public/private split (`03`, `04`).
+- Reddit through reddit.com itself (mirrors only, with most r/WisprFlow post
+  bodies removed); the Monologue feedback board, offline; the New York Times
+  essay on Wispr Flow; G2, TrustRadius and Product Hunt reviews (`06` source
+  table and addendum).
+- Kaggle's page through Kaggle's own servers or the Wayback Machine (both
+  serve a JavaScript shell); the percentage of test data on the public board,
+  which the page does not state (`03` addendum).
 - Shriberg's 1994 thesis text; an LDC word count for the Switchboard
   disfluency subset; a license statement for the IWSLT punctuation data
   (`01`).
 - HyPoradise's effective license: MIT in the paper, repo LICENSE and HF card,
   but a noncommercial no-derivatives agreement ships in the same repository
   (`01` §3). Not reused.
-- Whether Wispr Flow has a developer API; which models Willow, Typeless, Wispr
-  Flow and Aqua use for cleanup; VoiceInk Refine's license terms; current
-  LeMUR documentation (`05`).
-- A published consent template for releasing one's own dictations (`03` §4).
+- Which model Willow, Wispr Flow and Aqua use for cleanup (their privacy
+  policies name no provider); which of Typeless's two named providers does
+  cleanup; what `platform.wisprflow.ai` ("Flow API | Dashboard") offers behind
+  its JavaScript shell; current LeMUR documentation (`05` and addendum).
+- A consent template written for releasing one's own dictations; LDC's
+  consent and licensing pages (HTTP 403/404); the Common Voice terms page
+  itself (`03` §4 and addendum).
 
 ## Sources
 
-The six research files, all written from pages opened on 2026-10-24:
+The six research files, all written from pages opened on 2026-10-24, with
+addenda dated 2026-10-27 in files 03, 04, 05 and 06 that carry their own
+source lists:
 `01-existing-benchmarks.md`, `02-metrics.md`, `03-data.md`,
 `04-governance.md`, `05-market.md`, `06-user-pain.md`. One page was opened
 directly for this file:

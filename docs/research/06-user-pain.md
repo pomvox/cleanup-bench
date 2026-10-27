@@ -408,3 +408,155 @@ Academic
 - https://api.semanticscholar.org/graph/v1/paper/DOI:10.1145/3173574.3174141, 2026-10-24, confirms Hong and Findlater (2018), CHI; no abstract returned.
 - https://dl.acm.org/doi/10.1145/302979.303160 and https://dl.acm.org/doi/10.1145/3173574.3174141, 2026-10-24, HTTP 403; not read.
 - https://arxiv.org/abs/2602.22374, 2026-10-24, VoiceAlign (2026); abstract contains no dictation-error figures; not counted.
+
+## Addendum 2026-10-27
+
+Second attempt at Reddit, the venue the Limits section above names as the
+largest unread one. Same rules as the rest of this file: a snippet is not a
+source, every quote is short, no count is revised from memory.
+
+### Found
+
+**Direct routes are still closed.** With a browser User-Agent and with a
+plain one, `www.reddit.com/search.json`, `www.reddit.com/r/<sub>/search.json`,
+`www.reddit.com/r/WisprFlow/new.json`, `api.reddit.com/r/WisprFlow/new` and
+thread `.json` URLs all returned HTTP 403. `old.reddit.com` returned HTTP 200
+on every URL tried (site search, subreddit `.json`, thread `.json`) but served
+a "Welcome to Reddit" interstitial with no results or post text. A
+`www.reddit.com` thread HTML page returned 200 with the title "Reddit" and no
+comment markup.
+
+**Two archive mirrors answered.** `api.pullpush.io` returned HTTP 200 on
+keyword searches of submissions (HTTP 429 on some subreddit listings), and
+`arctic-shift.photon-reddit.com` returned HTTP 200 for subreddit post
+listings, comment searches by subreddit plus body keyword, and post lookups by
+id (its keyword search refuses a query without a subreddit or author, HTTP
+400). Everything below comes from those mirrors and is cited by the Reddit URL
+the mirror records; the live thread could not be opened to confirm any of it.
+In the arctic-shift copy of r/WisprFlow the body of most posts reads
+"[removed]" (7 of the 100 most recent posts carry a body); a 2025-12-16 post
+there says "so they removed my post because it's a support request", so
+complaint bodies on that subreddit are under-represented even in the mirror,
+while titles and comments survive. r/superwhisper bodies are mostly intact
+(87 of 100 most recent).
+
+**Complaints found, mapped to the pains above.**
+
+- *Words changed or meaning flipped by the cleanup layer* (§1). r/WisprFlow,
+  "Long-time user, honestly the quality has been going downhill for months"
+  (2026-06-08): "I get more word swaps and missed phrases than I used to"; a
+  comment in that thread (2026-07-31): "Instead of 'I want' it becomes 'i dont
+  want', and vice versa. Very dangerous when prompting". r/superwhisper, "How
+  to stop Superwhisper changing what i say into something else - pro member"
+  (2026-06-27): "when it changes entire sentences into something else that
+  then changes the 'meaning' of what i said". r/superwhisper, "Inaccuracy pro
+  member - refund?" (2026-06-27), comment of 2026-06-28: "its changing words,
+  things like is to an, and other words and changing the whole meaning of the
+  sentence" and "Its leaving out chunks of text". r/superwhisper, "Getting
+  frustrated" (2026-05-30): the app "seems to recently take significant
+  liberty in shortening/interpreting med-long dictation including taking out
+  important pieces of the context". r/WisprFlow comment of 2026-06-22 on the
+  vendor's "June 18, 2026 Product Updates" post: "I have to check and recheck
+  every transcription for punctuation errors, capitalization errors, incorrect
+  words that used to never be a problem".
+- *Invented content* (§3). r/superwhisper, "Superwhisper Hallucinations"
+  (2026-01-10), with a comment the same day: "With Super Wispr, I've had
+  entire paragraphs added to the end of my dictated text"; "Why will
+  superwhisper hallucinate and add in tons of random things I never said after
+  some of my voice memos?" (2026-01-05); "Is superwhisper leaking the
+  transcription text of other users to me?" (2025-07-26): from the third
+  paragraph the output "is completely not what I said". r/WisprFlow comment of
+  2026-08-18 on "Is accuracy back?": "it suddenly invents words that don't
+  exist at all".
+- *The model answers instead of cleaning* (§4). r/superwhisper, "Why is
+  SuperWhisper answering my dictation rather than just transcribing it?"
+  (2026-02-08): dictation "Hey how you doing", output "i'm doing good, how
+  about you"; "Getting frustrated" (2026-05-30): "it tries to answer what I'm
+  asking"; a comment of 2026-06-02 in that thread: message mode is
+  "occasionally hallucinating an 'answer' to something you said as a
+  question"; a comment of 2026-06-25 on "NEW: Superwhisper MCP and CLI":
+  "there are times when it tries to answer the question instead of 'pasting
+  the question.'"
+- *Imposed punctuation, casing and layout* (§5, §6). r/WisprFlow, "Feature
+  Request: Toggle for Basic vs. Full Auto-Punctuation" (2026-03-21): asks for a
+  mode "that only inserts periods, exclamation points, and question marks when
+  I explicitly say them"; "How to avoid inserting punctuation?" (2025-11-01):
+  "I don't want it to insert a period after the text, such as my to do list or
+  time tracker"; "Style preference - for comma separated lists versus bulleted
+  lists?" (2025-12-06): a dictated comma-separated clinical list is formatted
+  "as a bulleted list"; comment of 2026-10-21 on "Space before paste": "I
+  cannot get Wispr to add a period at the end of a single sentence in Discord,
+  even when I say 'period'". r/superwhisper, "Issue with Punctuations and
+  Formatting" (2026-09-15): on saying "Period" or "New Paragraph" the software
+  "will spell out those punctuations and formats instead of actually applying
+  them"; "Inaccuracy pro member - refund?" comment: "It's putting in capitals
+  where there shouldn't be."
+- *Cleanup-level control.* Comment of 2026-06-15 on the vendor's "April 24,
+  2026 Product Updates: Insights, Auto Cleanup, and more!": "how the hell is
+  there no difference between 'Add punctuation where it's needed' and 'Change
+  the actual words I said'? Light should never ever ever ever change my actual
+  words, unless they are HOMOPHONES". The vendor's own post "Reliability and
+  accuracy update: what happened, what's fixed, what's next" (2026-06-04):
+  "The introduction of our new auto-cleanup setting may have affected other
+  settings as well, and we're testing a rollback now."
+- *Capture-side, out of scope* (§2). r/WisprFlow, "Latency issue cutting off
+  the beginning of sentences." (2026-10-19, title only; body removed); the
+  2026-07-31 comment above: "The first words are now generally always missed
+  or messed up".
+
+**Not found.** No post or comment in the mirrors about an interrogative-phrase
+correction being mishandled; no complaint that fillers were left in. The
+Reddit material repeats the pattern of the HN, GitHub and App Store sources
+rather than adding a new failure class.
+
+### What this changes
+
+Nothing in the weighting. The four pains ranked highest in "Weighting the
+appendix's eleven categories" (words changed, invented content, answering
+instead of cleaning, imposed punctuation) gain consumer-side instances from
+the largest venue that was missing; `correction-interrogative` still has no
+user complaint behind it. The counts in §1 to §14 are not revised, because the
+mirrors' coverage is unknown and r/WisprFlow bodies are mostly removed; the
+material is listed, not tallied. The Limits paragraph should now read: Reddit
+was reachable only through archive mirrors, with r/WisprFlow post bodies
+mostly removed.
+
+### Sources (2026-10-27)
+
+Blocked or empty (recorded, not cited):
+
+- https://www.reddit.com/search.json?q=wispr+flow+removed+words, https://www.reddit.com/search.json?q=superwhisper+hallucinated, https://www.reddit.com/r/WisprFlow/search.json?q=removes+words&restrict_sr=1, https://www.reddit.com/r/macapps/search.json?q=dictation+cleanup+removed+words&restrict_sr=1, https://www.reddit.com/r/WisprFlow/new.json?limit=50, https://api.reddit.com/r/WisprFlow/new, https://www.reddit.com/r/micro_saas/comments/1x4yd1u.json, https://www.reddit.com/r/superwhisper/comments/1wh8i8o.json, 2026-10-27, HTTP 403 with a browser User-Agent and with a plain one.
+- https://old.reddit.com/search?q=wispr+flow+removes+words, https://old.reddit.com/r/WisprFlow/.json, https://old.reddit.com/r/micro_saas/comments/1x4yd1u.json, https://old.reddit.com/r/superwhisper/comments/1wh8i8o.json, 2026-10-27, HTTP 200, "Welcome to Reddit" interstitial, no post text.
+- https://www.reddit.com/r/superwhisper/comments/1wh8i8o/issue_with_punctuations_and_formatting/, 2026-10-27, HTTP 200, title "Reddit", no comment markup.
+- https://api.pullpush.io/reddit/search/submission/?q=wispr%20flow%20words&size=25 and the same endpoint for "wispr flow changed words", "superwhisper words", "dictation punctuation macos", 2026-10-27, mirror, HTTP 200; results were mostly app announcements and are not cited. The endpoint returned HTTP 429 for subreddit listings of WisprFlow and superwhisper and for "voiceink"; the comment endpoint returned no response.
+- https://arctic-shift.photon-reddit.com/api/posts/search?query=wispr%20flow&limit=25, 2026-10-27, mirror, HTTP 400 ("'query' query parameter requires one of: author, subreddit").
+
+Mirror listings used (arctic-shift.photon-reddit.com; all 2026-10-27, HTTP 200):
+
+- https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=WisprFlow&limit=100, plus the same with `before=2026-01-01` and with `after=2026-01-01&before=2026-09-01`, r/WisprFlow post listings; "[removed]" body counts above.
+- https://arctic-shift.photon-reddit.com/api/posts/search?subreddit=superwhisper&limit=100, r/superwhisper post listing.
+- https://arctic-shift.photon-reddit.com/api/comments/search?subreddit=WisprFlow&body=words&limit=100, https://arctic-shift.photon-reddit.com/api/comments/search?subreddit=superwhisper&body=words&limit=100, https://arctic-shift.photon-reddit.com/api/comments/search?subreddit=WisprFlow&limit=100, comment searches.
+- https://arctic-shift.photon-reddit.com/api/posts/ids?ids=... (the ids of the threads below), post records with title, date and body.
+
+Threads and comments cited (Reddit URLs as recorded by the mirror; not opened live):
+
+- https://www.reddit.com/r/WisprFlow/comments/1u0egnx/longtime_user_honestly_the_quality_has_been_going/, 2026-10-27 via mirror, post of 2026-06-08 and comment of 2026-07-31: word swaps, missed phrases, "I want" to "i dont want", first words missed.
+- https://www.reddit.com/r/superwhisper/comments/1uh5tey/how_to_stop_superwhisper_changing_what_i_say_into/, 2026-10-27 via mirror, post of 2026-06-27: sentences changed into something else.
+- https://www.reddit.com/r/superwhisper/comments/1uh9jg3/inaccuracy_pro_member_refund/, 2026-10-27 via mirror, post of 2026-06-27 and comment of 2026-06-28: words changed, chunks left out, capitals imposed.
+- https://www.reddit.com/r/superwhisper/comments/1try2ej/getting_frustrated/, 2026-10-27 via mirror, post of 2026-05-30 and comment of 2026-06-02: shortening, context removed, answering questions.
+- https://www.reddit.com/r/WisprFlow/comments/1u9jjhj/june_18_2026_product_updates_reliability_privacy/, 2026-10-27 via mirror, vendor post of 2026-06-18 and comment of 2026-06-22: check and recheck every transcription.
+- https://www.reddit.com/r/superwhisper/comments/1q99iif/superwhisper_hallucinations/, 2026-10-27 via mirror, post and comment of 2026-01-10: paragraphs appended.
+- https://www.reddit.com/r/superwhisper/comments/1q4ryze/why_will_superwhisper_hallucinate_and_add_in_tons/, 2026-10-27 via mirror, post of 2026-01-05: text never said appended to voice memos.
+- https://www.reddit.com/r/superwhisper/comments/1m9qdlf/is_superwhisper_leaking_the_transcription_text_of/, 2026-10-27 via mirror, post of 2025-07-26: paragraphs not said.
+- https://www.reddit.com/r/WisprFlow/comments/1vj6tte/is_accuracy_back/, 2026-10-27 via mirror, post of 2026-08-08 (body removed) and comment of 2026-08-18: invented words.
+- https://www.reddit.com/r/superwhisper/comments/1qz1hyn/why_is_superwhisper_answering_my_dictation_rather/, 2026-10-27 via mirror, post of 2026-02-08: model replies to the dictation.
+- https://www.reddit.com/r/superwhisper/comments/1ufdvc6/new_superwhisper_mcp_and_cli/, 2026-10-27 via mirror, comment of 2026-06-25: answers instead of pasting the question.
+- https://www.reddit.com/r/WisprFlow/comments/1rzglf0/feature_request_toggle_for_basic_vs_full/, 2026-10-27 via mirror, post of 2026-03-21: punctuation only when spoken.
+- https://www.reddit.com/r/WisprFlow/comments/1olnnit/how_to_avoid_inserting_punctuation/, 2026-10-27 via mirror, post of 2025-11-01: no trailing period wanted.
+- https://www.reddit.com/r/WisprFlow/comments/1pfq4sm/style_preference_for_comma_separated_lists_versus/, 2026-10-27 via mirror, post of 2025-12-06: list turned into bullets.
+- https://www.reddit.com/r/WisprFlow/comments/1njkwy8/space_before_paste/, 2026-10-27 via mirror, comment of 2026-10-21: spoken "period" not applied.
+- https://www.reddit.com/r/superwhisper/comments/1wh8i8o/issue_with_punctuations_and_formatting/, 2026-10-27 via mirror, post of 2026-09-15: spoken punctuation written out.
+- https://www.reddit.com/r/WisprFlow/comments/1susv4c/april_24_2026_product_updates_insights_auto/, 2026-10-27 via mirror, vendor post of 2026-04-24 and comment of 2026-06-15: Light level changes words.
+- https://www.reddit.com/r/WisprFlow/comments/1tx06rk/reliability_and_accuracy_update_what_happened/, 2026-10-27 via mirror, vendor post of 2026-06-04: auto-cleanup setting rollback.
+- https://www.reddit.com/r/WisprFlow/comments/1x9mg7p/latency_issue_cutting_off_the_beginning_of/, 2026-10-27 via mirror, post of 2026-10-19, title only.
+- https://www.reddit.com/r/WisprFlow/comments/1pnw05j/youre_fucking_kidding_me/, 2026-10-27 via mirror, post of 2025-12-16: support-request posts removed.
