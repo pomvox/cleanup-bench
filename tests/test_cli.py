@@ -38,12 +38,7 @@ def test_all_commands_registered():
     from cleanupbench.cli import build_parser
 
     names = set(build_parser()._subparsers._group_actions[0].choices)  # type: ignore[union-attr]
-    assert {"validate", "run", "score", "human-ceiling", "canary", "compare-rows", "power", "data"} <= names
-
-
-def test_report_not_yet_implemented(capsys):
-    assert main(["report"]) == 2
-    assert "not implemented" in capsys.readouterr().err
+    assert {"validate", "run", "score", "report", "human-ceiling", "canary", "compare-rows", "power", "data"} <= names
 
 
 def test_canary_command(capsys):

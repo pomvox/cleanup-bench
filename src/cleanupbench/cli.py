@@ -5,7 +5,7 @@
 - `score` recomputes scores.json for a run folder and refuses incomplete rows;
   `--check` compares against the committed scores.json instead of writing.
 - `human-ceiling` scores reference 2 against reference 1 (spec section 6.10).
-- `report` generates the static leaderboard from runs/ (phase 5).
+- `report` generates the static leaderboard from runs/ and `--check` compares it with the committed site.
 - `compare-rows`, `power` and `data ...` are registered by their own modules.
 """
 
@@ -141,11 +141,6 @@ def cmd_human_ceiling(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_report(args: argparse.Namespace) -> int:
-    print("cleanupbench report: not implemented in this phase (see docs/spec.md section 13)", file=sys.stderr)
-    return 2
-
-
 def cmd_canary(args: argparse.Namespace) -> int:
     print(CANARY)
     return 0
@@ -202,13 +197,12 @@ def build_parser() -> argparse.ArgumentParser:
     from cleanupbench.compare import register_commands as register_compare
     from cleanupbench.data.cli import register_commands as register_data
     from cleanupbench.power import register_commands as register_power
+    from cleanupbench.report import register_commands as register_report
 
     register_compare(sub)
     register_power(sub)
     register_data(sub)
-
-    p_report = sub.add_parser("report", help="generate the static leaderboard from runs/")
-    p_report.set_defaults(func=cmd_report)
+    register_report(sub)
 
     return parser
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Governance
+    url: https://github.com/pomvox/cleanup-bench/blob/main/GOVERNANCE.md
+    about: The submission rule, the dispute process and the conflict-of-interest statement.
+  - name: Submitting a row
+    url: https://github.com/pomvox/cleanup-bench/blob/main/SUBMITTING.md
+    about: The mechanics of a submission.

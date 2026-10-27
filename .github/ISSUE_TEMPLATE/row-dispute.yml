@@ -1,0 +1,46 @@
+name: Row dispute
+description: Report a replay failure of a committed row. Rows found non-reproducible are flagged with the issue linked, not deleted.
+title: "[row-dispute] runs/<system>/<date>"
+labels: ["row-dispute"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A row dispute is a replay failure only (GOVERNANCE.md): the claim must be one of the four below, with the command you ran and its output.
+  - type: input
+    id: run_folder
+    attributes:
+      label: Run folder
+      description: The `runs/<system>/<date>/` folder.
+    validations:
+      required: true
+  - type: dropdown
+    id: claim
+    attributes:
+      label: Claim type
+      options:
+        - "hashes do not match"
+        - "scorer disagrees with scores.json"
+        - "manifest incomplete"
+        - "two passes differ"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command run and output
+      description: For example `uv run cleanupbench score --check runs/<system>/<date>` or `uv run cleanupbench validate`, with the full output.
+      render: shell
+    validations:
+      required: true
+  - type: checkboxes
+    id: interest
+    attributes:
+      label: Declared interest
+      options:
+        - label: I have a row on the board
+  - type: input
+    id: interest_row
+    attributes:
+      label: Which row
+      description: The `runs/<system>/<date>/` folder of your row, if you have one. Leave empty otherwise.

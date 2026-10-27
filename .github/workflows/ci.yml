@@ -26,3 +26,5 @@ jobs:
         run: uv run cleanupbench validate
       - name: Recompute every committed scores.json and compare
         run: uv run cleanupbench score --check
+      - name: Regenerate the site and compare with the committed one
+        run: uv run cleanupbench report --check

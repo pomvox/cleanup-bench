@@ -1,0 +1,69 @@
+name: Item dispute
+description: Dispute an item or its reference. Items are retired, never edited (GOVERNANCE.md).
+title: "[item-dispute] <item id>"
+labels: ["item-dispute"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two reviewers decide in public on this issue: the maintainer and the external reviewer named in `GOVERNANCE.md`.
+        A disputed item that loses keeps its id, gets `status: retired`, is excluded from scoring in the next bench version,
+        and is listed in `ERRATA.md`. Published rows for earlier versions are unchanged.
+  - type: input
+    id: item_id
+    attributes:
+      label: Item id
+      description: As printed in the item file, for example `negatives-negation-0001`.
+    validations:
+      required: true
+  - type: input
+    id: bench_version
+    attributes:
+      label: Bench version
+      description: The `bench_version` the item was released in (the git tag, or `cleanupbench --version`).
+    validations:
+      required: true
+  - type: dropdown
+    id: rule
+    attributes:
+      label: Which law or rule the item violates
+      options:
+        - "law 1: never lose words"
+        - "law 2: every edit accounted for"
+        - "law 3: when unsure leave it as said"
+        - "reference-writing guideline"
+        - "other"
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: The reference you believe is wrong and why
+      description: Quote the input and the reference. Say what a correct reference would be and which rule it follows.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_fix
+    attributes:
+      label: Proposed fix
+      description: Retire the item, or retire it and add a replacement under a new id in the next version. Items are never edited in place.
+    validations:
+      required: true
+  - type: checkboxes
+    id: interest
+    attributes:
+      label: Declared interest
+      options:
+        - label: I have a row on the board
+  - type: input
+    id: interest_row
+    attributes:
+      label: Which row
+      description: The `runs/<system>/<date>/` folder of your row, if you have one. Leave empty otherwise.
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I understand that items are retired, never edited, and that published rows for earlier versions are unchanged.
+          required: true
