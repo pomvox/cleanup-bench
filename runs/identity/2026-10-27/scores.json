@@ -395,9 +395,9 @@
         "unchanged": 10
       },
       "word_loss": {
-        "mean": 0.016667,
+        "mean": 0.0,
         "n": 10,
-        "se": 0.016667
+        "se": 0.0
       }
     },
     "names-vocabulary": {
@@ -452,9 +452,9 @@
         "unchanged": 9
       },
       "word_loss": {
-        "mean": 0.026984,
+        "mean": 0.0,
         "n": 9,
-        "se": 0.018202
+        "se": 0.0
       }
     },
     "negatives": {
@@ -680,9 +680,9 @@
         "unchanged": 10
       },
       "word_loss": {
-        "mean": 0.058182,
+        "mean": 0.0,
         "n": 10,
-        "se": 0.029666
+        "se": 0.0
       }
     }
   },
@@ -1825,7 +1825,7 @@
       "slot_fail": false,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.166667
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -2045,7 +2045,7 @@
       "slot_fail": true,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.142857
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -2145,7 +2145,7 @@
       "slot_fail": true,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.1
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -3045,7 +3045,7 @@
       "slot_fail": true,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.2
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -3065,7 +3065,7 @@
       "slot_fail": true,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.2
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -3085,7 +3085,7 @@
       "slot_fail": true,
       "status": "unchanged",
       "tp": 0,
-      "word_loss": 0.181818
+      "word_loss": 0.0
     },
     {
       "best_reference": 0,
@@ -3219,7 +3219,7 @@
     "bootstrap_resamples": 1000,
     "bootstrap_seed": 20261027,
     "case_substitution_cost": 0.5,
-    "scorer_version": "1",
+    "scorer_version": "2",
     "substitution_cost": 1.0
   },
   "run_dir": "runs/identity/2026-10-27",
@@ -3277,9 +3277,9 @@
         "unchanged": 3
       },
       "word_loss": {
-        "mean": 0.055556,
+        "mean": 0.0,
         "n": 3,
-        "se": 0.055556
+        "se": 0.0
       }
     },
     "lists-layout/spoken-layout": {
@@ -3904,9 +3904,9 @@
         "unchanged": 2
       },
       "word_loss": {
-        "mean": 0.1,
+        "mean": 0.0,
         "n": 2,
-        "se": 0.1
+        "se": 0.0
       }
     },
     "spoken-form/date-time": {
@@ -3961,9 +3961,9 @@
         "unchanged": 2
       },
       "word_loss": {
-        "mean": 0.190909,
+        "mean": 0.0,
         "n": 2,
-        "se": 0.009091
+        "se": 0.0
       }
     },
     "spoken-form/email-url": {

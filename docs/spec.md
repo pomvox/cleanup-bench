@@ -327,15 +327,18 @@ deliberately weaker than Whisper's (`02` metric 2; D2).
 
 ### 6.4 Metric 3: word-loss rate (hard constraint)
 
-Let `R` be the multiset of content tokens of the best reference and `O` that of
-the output. Loss = |R − O| / |R| (multiset difference), averaged over items;
-items with |R| = 0 contribute 0 unless the output is non-empty, in which case
-they contribute 0 to loss and are scored by metric 4. The best reference is
-the one minimizing loss. An empty output with a non-empty reference has loss
-1 (D14). Provenance: WER's deletion term restricted to content tokens; SARI's
-"input retained in the references but deleted by the system" region (`02`
-metric 3). Measured against the reference, not the input, so sanctioned
-deletions (fillers, reparanda) are not losses.
+Let `R` be the multiset intersection of the content tokens of the best
+reference with the content tokens of the input (the words the speaker said
+that the reference keeps), and `O` the multiset of output content tokens.
+Loss = |R − O| / |R| (multiset difference), averaged over items; items with
+|R| = 0 contribute 0. The best reference is the one minimizing loss. An empty
+output with a non-empty reference has loss 1 (D14). A token the reference
+introduces (a digit form, a vocabulary spelling) is scored by metric 1, never
+as loss, so the identity row's loss is zero by construction. Provenance:
+WER's deletion term restricted to content tokens; SARI's "input retained in
+the references but deleted by the system" region (`02` metric 3). Measured
+against the reference, not the input, so sanctioned deletions (fillers,
+reparanda) are not losses.
 
 What it cannot catch: a word replaced by a wrong word (that is a substitution,
 caught by metrics 1 and 4).

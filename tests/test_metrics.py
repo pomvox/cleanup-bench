@@ -99,32 +99,48 @@ def test_exact_match_uses_minimal_normalizer_only():
 
 
 def test_word_loss_hand_worked():
+    src = "never merge a change like this without a review"
     ref = "Never merge a change like this without a review."
-    # reference content tokens: never merge a change like this without a review = 9 tokens ("a" twice)
-    # output drops "never": missing 1 of 9
-    assert math.isclose(word_loss("Merge a change like this without a review.", ref), 1 / 9)
+    # reference content tokens: never merge a change like this without a review = 9 tokens ("a" twice),
+    # all present in the input, so R has 9 tokens. Output drops "never": missing 1 of 9.
+    assert math.isclose(word_loss(src, "Merge a change like this without a review.", ref), 1 / 9)
     # output drops nothing (only casing/punctuation differ): 0
-    assert word_loss("never merge a change like this without a review", ref) == 0.0
+    assert word_loss(src, src, ref) == 0.0
     # output drops one of the two "a": multiset difference catches it: 1/9
-    assert math.isclose(word_loss("Never merge change like this without a review.", ref), 1 / 9)
+    assert math.isclose(word_loss(src, "Never merge change like this without a review.", ref), 1 / 9)
     # empty output: everything lost
-    assert word_loss("", ref) == 1.0
+    assert word_loss(src, "", ref) == 1.0
     # empty reference: no loss possible
-    assert word_loss("anything", "") == 0.0
+    assert word_loss(src, "anything", "") == 0.0
 
 
 def test_word_loss_is_against_reference_not_input():
+    src = "um let's meet on tuesday wait no friday at noon"
+    ref = "Let's meet on Friday at noon."
     # Sanctioned deletions (fillers, reparandum) are not losses.
-    assert best_word_loss("Let's meet on Friday at noon.", ["Let's meet on Friday at noon."]) == 0.0
+    assert best_word_loss(src, "Let's meet on Friday at noon.", [ref]) == 0.0
     # Keeping the reparandum is not a loss either (it is an FN edit in metric 1).
-    assert best_word_loss("Let's meet on Tuesday wait no Friday at noon.", ["Let's meet on Friday at noon."]) == 0.0
+    assert best_word_loss(src, "Let's meet on Tuesday wait no Friday at noon.", [ref]) == 0.0
+    # Dropping "noon", which the speaker said and the reference keeps: 1 of 6 (let's meet on friday at noon).
+    assert math.isclose(best_word_loss(src, "Let's meet on Friday at.", [ref]), 1 / 6)
+
+
+def test_word_loss_ignores_tokens_the_reference_introduced():
+    # The reference converts "twenty five" to "25"; identity output lacks "25" but lost nothing the speaker said.
+    src = "we sold twenty five units"
+    assert word_loss(src, src, "We sold 25 units.") == 0.0
+    # R = {we, sold, units}; an output that drops "units" loses 1 of 3.
+    assert math.isclose(word_loss(src, "We sold 25.", "We sold 25 units."), 1 / 3)
+    # A vocabulary spelling the input lacks is likewise not a loss for an output that keeps the misspelling.
+    assert word_loss("email salamagari today", "email salamagari today", "Email Salammagari today.") == 0.0
 
 
 def test_best_word_loss_takes_min_over_references():
+    src = "we sold twenty five units"
     refs = ["We sold twenty five units.", "We sold 25 units."]
-    assert best_word_loss("We sold 25 units.", refs) == 0.0
-    # Against ref 0 the output "We sold 25 units." misses "twenty" and "five": 2/5; min is 0.
-    assert math.isclose(word_loss("We sold 25 units.", refs[0]), 2 / 5)
+    assert best_word_loss(src, "We sold 25 units.", refs) == 0.0
+    # Against ref 0 the output "We sold 25 units." misses "twenty" and "five": 2/5; min over refs is 0.
+    assert math.isclose(word_loss(src, "We sold 25 units.", refs[0]), 2 / 5)
 
 
 # --- metric 4 ---------------------------------------------------------------------

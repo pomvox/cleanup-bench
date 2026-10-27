@@ -83,8 +83,14 @@ def exact_match(output_text: str, references: Sequence[str]) -> bool:
 # --- metric 3: word loss ------------------------------------------------------------
 
 
-def word_loss(output_text: str, reference: str) -> float:
-    ref = Counter(content_tokens(reference))
+def word_loss(input_text: str, output_text: str, reference: str) -> float:
+    """Reference content tokens the speaker said (present in the input) that the output lacks.
+
+    R is the multiset intersection of the reference's and the input's content
+    tokens: a token the reference introduces (a digit form, a vocabulary
+    spelling) is scored by metric 1, never as loss. Loss = |R - O| / |R|.
+    """
+    ref = Counter(content_tokens(reference)) & Counter(content_tokens(input_text))
     if not ref:
         return 0.0
     out = Counter(content_tokens(output_text))
@@ -92,8 +98,8 @@ def word_loss(output_text: str, reference: str) -> float:
     return missing / sum(ref.values())
 
 
-def best_word_loss(output_text: str, references: Sequence[str]) -> float:
-    return min(word_loss(output_text, ref) for ref in references)
+def best_word_loss(input_text: str, output_text: str, references: Sequence[str]) -> float:
+    return min(word_loss(input_text, output_text, ref) for ref in references)
 
 
 # --- metric 4: insertions ----------------------------------------------------------
@@ -234,7 +240,7 @@ def score_item(
     tp, fp, fn, idx = best_edit_counts(input_text, output_text, references)
     score.tp, score.fp, score.fn, score.best_reference = tp, fp, fn, idx
     score.exact_match = exact_match(output_text, references)
-    score.word_loss = best_word_loss(output_text, references)
+    score.word_loss = best_word_loss(input_text, output_text, references)
     score.insertion = insertion_rate(input_text, output_text, references)
     score.slot_fail = slot_failure(output_text, must_contain, must_not_contain)
     score.noop = is_noop_item(input_text, references)
