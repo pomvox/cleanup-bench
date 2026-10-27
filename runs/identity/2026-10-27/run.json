@@ -1,0 +1,73 @@
+{
+  "adapter": {
+    "config": {},
+    "name": "identity",
+    "version": "1"
+  },
+  "attestation": {
+    "declared_exposure": "none",
+    "known_overlap": "none; the identity system has no training data",
+    "no_training_on_items": true
+  },
+  "bench_version": "1.0.0-dev",
+  "checked_by": null,
+  "checked_date": null,
+  "decoding": {
+    "max_tokens": null,
+    "strategy": "greedy",
+    "temperature": 0
+  },
+  "determinism": {
+    "first_divergent_item": null,
+    "identical": true,
+    "run_a_sha256": "0ef5394ffb37af26c581f405193b0456441f7d3e75150d970b2d550e27eee8e8",
+    "run_b_sha256": "0ef5394ffb37af26c581f405193b0456441f7d3e75150d970b2d550e27eee8e8"
+  },
+  "hardware": {
+    "accelerator": "Apple M1",
+    "machine": "Abhis-MacBook-Pro.local (Apple M1)",
+    "os": "Darwin 24.6.0",
+    "ram_gb": 16.0
+  },
+  "hosted": false,
+  "hosted_expiry_flag": null,
+  "items_sha256": "e5611224871e36060bb115a2708f7c0ce470a5791e851e6f8bdfb59d61d126a7",
+  "notes": "The floor: every output equals its input. Validates the scorer: zero word loss, zero insertions, zero over-cleaning on noop items, F0.5 undefined (no edits).",
+  "outputs_sha256": "9829500cfc5e7a5523699e4c4a114c7e478e3c14e67973e4a888f2a0e606e2d7",
+  "prompt": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "text": ""
+  },
+  "run": {
+    "finished_at": "2026-10-27T18:10:37Z",
+    "item_count": 126,
+    "items_path": "data/items",
+    "started_at": "2026-10-27T18:10:37Z"
+  },
+  "schema_version": 1,
+  "software": {
+    "bench_commit": "92cef7a0a6272f364e9c9e07bcb827ac446df8dc",
+    "packages": {
+      "cleanupbench": "0.1.0",
+      "jsonschema": "4.26.0"
+    },
+    "python": "3.12.12"
+  },
+  "system": {
+    "display_name": "identity (output = input)",
+    "license": "MIT",
+    "model_id": "identity",
+    "model_revision": "none",
+    "name": "identity",
+    "open_weights": true,
+    "org": "Pomvox",
+    "organizer_row": true,
+    "params_total": 0,
+    "params_total_note": "",
+    "weights_sha256": "689f6a627384c7dcb2dcc1487e540223e77bdf9dcd0d8be8a326eda65b0ce9a4"
+  },
+  "vocabulary_policy": {
+    "rendering": "",
+    "source": "none"
+  }
+}
